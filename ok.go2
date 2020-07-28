@@ -1,0 +1,7 @@
+package result
+
+func Ok[type T](ok T) Result[T] {
+	return Result[T] {
+		ok: ok,
+	}
+}

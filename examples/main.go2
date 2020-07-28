@@ -1,0 +1,15 @@
+package main
+
+import (
+	"fmt"
+
+	"github.com/joshualawson/result"
+)
+
+func main() {
+	res := result.Ok[string]("all ok")
+
+	res.Ok(func(s string) {
+		fmt.Println(s)
+	})
+}

@@ -1,0 +1,8 @@
+package result
+
+func Err[type T](err error) Result[T] {
+	return Result[T]{
+		isErr: true,
+		err: err,
+	}
+}

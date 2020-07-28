@@ -1,0 +1,27 @@
+package result
+
+type Result[type T] struct {
+	isErr bool
+	err error
+	ok T
+}
+
+func (r Result[T]) Ok(f func(T)) Result[T] {
+	if !r.isErr {
+		f(r.ok)
+	}
+	
+	return r
+}
+
+func (r Result[T]) Err(f func(error)) Result[T] {
+	if r.isErr {
+		f(r.err)
+	}
+
+	return r
+}
+
+func (r Result[T]) IsErr() bool {
+	return r.isErr
+}
