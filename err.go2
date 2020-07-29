@@ -1,7 +1,7 @@
 package result
 
-func Err[type T](err error) Result[T] {
-	return Result[T]{
+func Err[type T interface{}, E error](err E) Result[T, E] {
+	return Result[T, E]{
 		isErr: true,
 		err: err,
 	}

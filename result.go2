@@ -1,12 +1,12 @@
 package result
 
-type Result[type T] struct {
+type Result[type T interface{}, E error] struct {
 	isErr bool
-	err error
+	err E
 	ok T
 }
 
-func (r Result[T]) Ok(f func(T)) Result[T] {
+func (r Result[T, E]) Ok(f func(T)) Result[T, E] {
 	if !r.isErr {
 		f(r.ok)
 	}
@@ -14,7 +14,7 @@ func (r Result[T]) Ok(f func(T)) Result[T] {
 	return r
 }
 
-func (r Result[T]) Err(f func(error)) Result[T] {
+func (r Result[T, E]) Err(f func(E)) Result[T, E] {
 	if r.isErr {
 		f(r.err)
 	}
@@ -22,6 +22,6 @@ func (r Result[T]) Err(f func(error)) Result[T] {
 	return r
 }
 
-func (r Result[T]) IsErr() bool {
+func (r Result[T, E]) IsErr() bool {
 	return r.isErr
 }

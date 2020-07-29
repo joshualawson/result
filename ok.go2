@@ -1,6 +1,6 @@
 package result
 
-func Ok[type T](ok T) Result[T] {
+func Ok[type T interface{}, E error](ok T) Result[T, E] {
 	return Result[T] {
 		ok: ok,
 	}
